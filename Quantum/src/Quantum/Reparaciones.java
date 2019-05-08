@@ -17,11 +17,6 @@ public class Reparaciones {
         return tipoVehiculo;
     }
 
-    public Reparaciones setTipoVehiculo(Vehiculo tipoVehiculo) {
-        this.tipoVehiculo = tipoVehiculo;
-        return this;
-    }
-
     public double getPecioTotal(){
         return tipoVehiculo.getPrecioReparacion() + getPrecioBase();
     }

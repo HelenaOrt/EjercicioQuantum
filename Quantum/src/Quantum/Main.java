@@ -2,9 +2,7 @@ package Quantum;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.OptionalDouble;
 
 public class Main {
 
@@ -31,23 +29,34 @@ public class Main {
         repairList.forEach(System.out::println);
 
         System.out.println();
-        System.out.println("Total de todas las reparaciones");
         double sum = repairList.stream().mapToDouble(Reparaciones::getPecioTotal).sum();
-        System.out.println(sum);
-        //contar reparaciones de moto
+        System.out.println("Coste total las reparaciones " + sum + " euros");
 
 
-        if(!(vehicleList.get(0)instanceof Moto)){
-            System.out.println("Es un coche");
-        }
+        long reparacionesMoto = repairList.stream().filter(m -> m.getTipoVehiculo() instanceof Moto).count();
+        System.out.println("Cantidad de motos reparadas: " + reparacionesMoto);
 
-        //media del coste de cada factura
 
-        //total facturado
+        OptionalDouble average = repairList.stream().mapToDouble(Reparaciones::getPecioTotal).average();
+        System.out.println("Coste medio de cada factura: " + average.getAsDouble() + " euros");
 
-        //Total facturado solo en reparaciones de coche
 
-        //Total facturado en cada tipo de vehiculo
-        //collectors groupingBy
+        double motorbikeCost = repairList.stream().
+                filter(m -> m.getTipoVehiculo() instanceof Moto).
+                mapToDouble(Reparaciones::getPecioTotal).sum();
+
+        System.out.println("Total facturado en reparaciones de moto " + motorbikeCost + " euros");
+
+        double carCost = repairList.stream().
+                filter(m -> m.getTipoVehiculo() instanceof Coche).
+                mapToDouble(Reparaciones::getPecioTotal).sum();
+
+        System.out.println("Total facturado en reparaciones de coche " + carCost + " euros");
+
     }
 }
+
+//ejemplo instance of
+/*if(!(vehicleList.get(0)instanceof Moto)){
+            System.out.println("Es un coche");
+        }*/

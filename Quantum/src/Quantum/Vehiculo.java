@@ -10,19 +10,19 @@ public class Vehiculo {
         this.color = color;
     }
 
-    public double getPrecioReparacion() {
+    protected double getPrecioReparacion() {
         return REPAIR_PRICE;
     }
 
-    public String getColor() {
+    protected String getColor() {
         return color;
     }
 
     @Override
     public String toString() {
-        return "Vehiculo{" +
-                ", color='" + color + '\'' +
-                '}';
+        return "Vehiculo: " +
+                "color: " + color +
+                "coste reparacion: " + getPrecioReparacion() ;
     }
 }
 
